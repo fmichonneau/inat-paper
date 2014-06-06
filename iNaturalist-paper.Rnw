@@ -1,12 +1,13 @@
 
-\documentclass[46pt, nnermargin=7mm, blockverticalspace=7mm, colspace=7mm]{tikzposter} % See Section 3
+\documentclass[11pt]{article}
 
 % Use fancy fonts
 \usepackage{fontspec}
-\setmainfont{Liberation Sans}
+\setmainfont{Calibri}
 \setsansfont{SourceSansPro-Regular}
 \setmonofont{Consolas}
 
+% pretty URLs
 \usepackage{hyperref}
 \hypersetup{
   colorlinks=true,
@@ -17,6 +18,12 @@
 }
 \urlstyle{sf}
 
+% authors + affiliations
+\usepackage{authblk}
+
+% biblio
+\usepackage{natbib}
+
 % can use captions outside figure environments
 \usepackage{capt-of}
 
@@ -25,223 +32,162 @@
 \usepackage{xunicode}
 \defaultfontfeatures{Mapping=tex-text}
 
-\title{\textbf{Using iNaturalist to engage the public and learn more about echinoderms}}
+% margins
+\usepackage[margin=1in]{geometry}
 
-\institute{Florida Museum of Natural History, University of Florida,
-  Gainesville, FL 32611 \\
-  \vspace{1cm}
-  {\normalsize francois.michonneau@gmail.com, paulay@flmnh.ufl.edu} }
+% title
+\title{Using iNaturalist to learn more about echinoderms}
 
-\author{Fran\c{c}ois Michonneau, Gustav Paulay}
+\author{Fran\c{c}ois Michonneau}
+\author{Gustav Paulay}
+\affil{Florida Museum of Natural History, University of Florida, Gainesville,
+  FL 32611-7800, USA; emails: francois.michonneau@gmail.com, paulay@flmnh.ufl.edu}
 
+\date{}
 
-\usetheme{Autumn}
+\renewcommand\Authands{ and }
+
+% -------------------   end of header
 
 \begin{document}
 
 <<setup, echo=FALSE, cache=FALSE, include=FALSE>>=
-opts_chunk$set(fig.path='figures/latex-', cache.path='cache/latex-', dev="pdf",
+opts_chunk$set(fig.path='figures/latex-', cache.path='cache/latex-', dev="tikz",
                external=TRUE, fig.env="center")
-read_chunk('code/poster-code.R')
+options(tikzDefaultEngine = "xetex")
+read_chunk('code/paper-code.R')
 @
 
 <<init-map, echo=FALSE, cache=TRUE, include=FALSE>>=
 
 @ 
 
+<<data-prep, echo=FALSE, cache=TRUE, include=FALSE>>=
+
+@ 
+
 \maketitle
 
-%----------------------      poster starts here    ----------------------------%
+%----------------------      paper starts here    ----------------------------%
 
-\begin{columns}
+\section*{Context}
 
-\column{.43}
-\block{Introduction}{
+Echinoderms are among the most conspicuous and abundant marine
+invertebrates. Several species of echinoderms undergo important demographic
+fluctuations, with important ecological consequences, for reasons that are not
+always well understood (e.g., crown-of-thorns outbreaks, \textit{Diadema
+  antillarum} die-off, starfish-wasting-syndrome, reviewed in
+\citealt{Uthicke2009}). In addition, many species are targeted by unregulated
+fisheries (e.g., \citealt{Purcell2014}).
 
-  Echinoderms are among the most conspicuous and abundant marine
-  invertebrates. Several species of echinoderms undergo important demographic
-  fluctuations for reasons that are not always well understood (e.g.,
-  crown-of-thorns outbreaks, \textit{Diadema antillarum} die-off,
-  starfish-wasting-syndrome), with important ecological consequences. In
-  addition, many species are targeted by unregulated fisheries.
-  
-  \vspace{.5cm}
+Despite these factors, echinoderms have not received a lot of taxonomic
+attention, and many large species remain undescribed and/or poorly
+known. Regularly, field guides illustrate undescribed species, and divers
+commonly photograph new or poorly known species. 
 
-  Despite these factors, echinoderms have not received a lot of taxonomic
-  attention, and many large species remain undescribed and/or poorly
-  known. Regularly, field guides illustrate undescribed species, and divers
-  commonly photograph new or poorly known species.
-  
-  \vspace{.5cm}
+With recent technological advances, it has become increasingly easier to
+document species encountered in nature. For instance, smartphones can, with the
+single touch of the screen, take a picture while associating the exact
+geographical location and time of the observation. Digital cameras have made
+underwater photography much more accessible, and many divers now document the
+species they encounter by sharing their pictures on social media websites.
 
-  With recent technological advances, it has become increasingly easier to
-  document species encountered in nature. For instance, smartphones can, with
-  the single touch of the screen, take a picture while associating the exact
-  geographical location and time of the observation. Digital cameras have made
-  underwater photography much more accessible, and many divers now document the
-  species they encounter by sharing their pictures on social media websites.
+Our knowledge of echinoderms could therefore be improved by aggregating user
+observations of these organisms, while, at the same time, educating the public
+about the diversity and natural history of these fascinating organisms.
 
-  \vspace{.5cm}
+\section*{What is iNaturalist?}
 
-  Our knowledge of echinoderms could therefore be improved by aggregating user
-  observations of these organisms, while educating the public at the same time
-  about these fascinating organisms.
-
-  }
-
-\column{.57}
-\block{What is iNaturalist?}{ 
-
-  iNaturalist (\href{http://inaturalist.org}{http://inaturalist.org}) is a
-  website that allows users to submit observations about any species, along with
-  images, GPS coordinates and ancillary information about the habitat or natural
-  history. Once submitted the observations can be further identified by the
-  community and validated by "curators". This mechanism allows users to hone
-  their identification skills, learn about the organisms, and communicate with
-  each other. Observations in turn provide a wealth of information about
-  distribution, variation, abundance, and other aspects of natural history.
-
-  \vspace{.5cm}
-
-  We started a project on Echinoderms
-  (\href{http://inaturalist.org/projects/echinoderms}{http://inaturalist.org/projects/echinoderms})
-  to gather observations worldwide, and across taxa. Our goal is to improve our
-  knowledge of species distributions, variation, and biology, and to educate the
-  public about the diversity of Echinoderms. This platform provides a great
-  outreach tool facilitating communication between scientists and
-  naturalists. Because iNaturalist is easy to use and has applications for
-  mobile devices, it can also be used during organized citizen science
-  initiatives such as Bioblitz, or class field trips.
-
-  \vspace{.5cm}
-
-  This crowd-sourcing effort has the potential to greatly facilitate the
-  documentation of species diversity, occurrences, variation, changes in
-  distributions and species density (e.g., crown-of-thorns outbreaks,
-  consequences of the starfish wasting syndrome) while educating the public
-  about echinoderms
-
-  \vspace{.5cm}
-
-  Over a hundred users have already contributed 700+ observations. We will
-  advertise the project more widely to the SCUBA diving community and through
-  citizen science initiatives. We welcome everyone to submit observations or
-  help curating the observations submitted to the project. Don't hesitate to
-  join us!
-
-}
-
-\end{columns}
-
-
-\begin{columns}
-
-\column{0.25}
-\block{Project page}{
+iNaturalist (\href{http://inaturalist.org}{http://inaturalist.org}) is a website
+that allows users to submit observations about any species (on land or
+underwater), along with images, GPS coordinates and ancillary information about
+the habitat or natural history (Figure~\ref{fig:example-observation}). Once
+submitted, the observations can be further identified by the community and
+validated by "curators" (users with recognized knowledge of a given taxonomic
+group whose opinion can be trusted). This mechanism allows users to hone their
+identification skills, learn about the organisms, and communicate with each
+other. Observations, in turn, provide a wealth of information about
+distribution, variation, abundance, and other aspects of natural history.
 
 \begin{center}
-\includegraphics[width=.215\columnwidth]{images/inat-echino}
-\captionof{figure}{The Echinoderm project on iNaturalist}
-\end{center}
-
-}
-
-\column{0.25}
-\block{User observation}{
-
-\begin{center}
-\includegraphics[width=.215\columnwidth]{images/inat-screenshot}
+\includegraphics[width=.5\columnwidth]{images/inat-screenshot}
 \captionof{figure}{Example of an user-submitted observation}
+\label{fig:example-observation}
 \end{center}
 
-}
+\section*{The Echinoderm project on iNaturalist}
 
-\column{0.25}
-\block{Observations per class}{
+We started a project on Echinoderms
+(\href{http://inaturalist.org/projects/echinoderms}{http://inaturalist.org/projects/echinoderms})
+to gather observations worldwide, and across taxa. Our goal is to improve our
+knowledge of species distributions, variation, and biology, and to educate the
+public about the diversity of echinoderms. This platform provides a great
+outreach tool facilitating communication between scientists and
+naturalists. Because iNaturalist is easy to use and has applications for mobile
+devices, it can also be used during organized citizen science initiatives such
+as Bioblitz, or class field trips.
+
+Beyond outreach, iNaturalist can be a useful tool for scientists. Echinoderms
+are among the few mobile invertebrate regularly recorded in coral reef ecosystem
+monitoring. By submitting species observations on iNaturalist, data will be
+archived, accessible, and shareable with the community. Additionally, it is also
+an opportunity to obtain accurate identification for the species encountered
+with the help of the community.
+
+The aggregated data is made openly available and can be used by scientists to
+study demographic and spatial patterns, or even to infer distributions using
+ecological niche modeling. For instance, recent taxonomic research on sea
+cucumbers has shown that species can be told apart based on their color patterns
+(e.g., \citealt{Kim2013,Kerr2013}). However, taxonomic confusion through the
+years has hindered our knowledge of species distributions, as the incorrect
+species names have extensively been used in the literature. Having photographic
+evidence associated with geographical data will allow to validate geographical
+distributions once taxonomic research has clarified species limits. Furthermore,
+iNaturalist could be very useful to track through space and time changes in
+species abundance during a crown-of-thorns outbreak for instance.
+
+\section*{Present and future observations}
+
+Since the beginning of the project in March 2014, over a hundred users have
+already contributed 850+ echinoderm observations worldwide. Currently, large and
+abundant species from the intertidal of the Western United States dominate,
+reflecting the development of iNaturalist in California
+(Figure~\ref{fig:all-observations}). However, underwater sightings from the
+Caribbean and the Indo-West Pacific also represent a large proportion of the
+observations and indicate the potential of iNaturalist to document marine
+invertebrate biodiversity.
+
+We aim at expanding both taxonomic and geographic coverage. Many species of
+echinoderms can be found associated with coral reefs, and for most, their
+geographical distribution is poorly known. Reef scientists can improve our
+knowledge of their distribution by reporting the species they see in the
+field. Additionally, we are in the process of advertising the project to the
+SCUBA diving community and through citizen science initiatives to increase
+participation.
+
+We welcome everyone to submit their echinoderm observations, or help curating
+the records submitted to the project. Don't hesitate to join us!
 
 \begin{center}
-<<abundance-per-class, dependson='init-map', eval=TRUE, cache=TRUE, echo=FALSE, fig.keep='last', warning=FALSE, fig.width=5, fig.height=3, out.width='.22\\columnwidth'>>=
-
-@ 
-\captionof{figure}{Number of observations per class}
-\end{center}
-
-\vspace{.8cm}
-
-Large and abundant species from the intertidal of the Western United States
-dominate the observations at present, reflecting the development of iNaturalist
-in California. However, underwater sightings from the Caribbean and the
-Indo-West Pacific also represent a large proportion of the observations.
-}
-
-\column{0.25}
-\block{Most recorded species}{
-\begin{center}
-<<top-species, dependson='init-map', eval=TRUE, cache=TRUE, echo=FALSE, fig.keep='last', warning=FALSE, fig.width=5, fig.height=6, out.width='.212\\columnwidth'>>=
-
-@ 
-\captionof{figure}{List of the 20 species the most observed on iNaturalist}
-\end{center}
-}
-
-
-
-\end{columns}
-
-% --- start map
-
-\begin{columns}
-
-\column{.7}
-\block{Map of recorded observations}{
-
-\begin{center}
-<<all-observations, dependson='init-map', eval=TRUE, cache=TRUE, echo=FALSE, fig.keep='last', warning=FALSE, fig.width=20, out.width='.67\\columnwidth'>>=
+<<all-observations, dependson='data-prep', eval=TRUE, cache=TRUE, echo=FALSE, fig.keep='last', warning=FALSE, fig.width=8, out.width='\\columnwidth'>>=
 
 @
-\captionof{figure}{Global distribution of observations recorded by iNaturalist users} 
+\captionof{figure}{Global distribution of observations recorded by iNaturalist
+  users as of May 29th, 2014 per class}
+\label{fig:all-observations}
 \end{center}
 
-}
+\section*{Methods}
 
-\column{.3}
-\block{Distribution maps}{
+{\small This article is open-source (CC-BY), fully reproducible and available on
+  github
+  (\href{https://github.com/fmichonneau/inat-paper/}{http://github.com/fmichonneau/inat-paper}). It
+  was made possible using R \citep{Rproject} complemented with the packages
+  ggplot2 \citep{Wickham2009}, knitr \citep{Xie2014}, taxize
+  \citep{Chamberlain2013,Chamberlain2014}, and wesanderson \citep{Ram2014}.  }
 
-\begin{center}
-<<map-pisaster-strongylo, dependson='init-map', eval=TRUE, cache=TRUE, echo=FALSE, fig.keep='last', warning=FALSE, fig.width=6, fig.height=5.2, out.width='.255\\columnwidth'>>=
+\bibliographystyle{coral-reefs}
 
-@ 
-\captionof{figure}{Distribution map for two highly observed species generated
-  from user observations}
-\end{center}
-
-\vspace{2mm}
-
-}
-\end{columns}
-
-% --- end maps
-
-% --- footer
-
-\block{}{
-
-  {\small This poster is open-source (CC-BY), fully reproducible and available
-    on Figshare (DOI:
-    \href{http://dx.doi.org/10.6084/m9.figshare.1040435}{10.6084/m9.figshare.1040435}). The
-    source code can be obtained from:
-    \href{https://github.com/fmichonneau/inat-poster/}{http://github.com/fmichonneau/inat-poster}. It
-    was made possible using the LaTeX package
-    \href{http://www.ctan.org/pkg/tikzposter}{tikzposter}, and
-    \href{http://www.r-project.org}{R} complemented with the packages
-    \href{https://github.com/hadley/ggplot2/}{ggplot2} (by Hadley Wickham),
-    \href{http://yihui.name/knitr/}{knitr} (by Yihui Xie),
-    \href{http://f1000research.com/articles/2-191/v2}{taxize} (by Scott
-    Chamberlain \& Eduard Szocs), and
-    \href{https://github.com/karthik/wesanderson}{wesanderson} (by Karthik Ram).
-  }
-
-} 
-% ---- end footer
+\bibliography{iNaturalist-nourl}
 
 \end{document}
