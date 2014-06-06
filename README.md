@@ -29,15 +29,21 @@ do:
     library(knitr)
     knit("iNaturalist-paper.Rnw")
 
-and then compile with your favorite TeX engine the file generated
-`iNaturalist-paper.tex`.
+and then compile the file generated (`iNaturalist-paper.tex`) using `XeLaTeX`.
 
 I used Ubuntu 14.04 to generate the files included in this repository.
 
-# License
+# Citation & License
 
 The content of this repository is under a Creative Commons Attribution License
-[CC-BY](http://creativecommons.org/licenses/by/4.0)
+[CC-BY 4.0](http://creativecommons.org/licenses/by/4.0).
 
-> Michonneau F. & Paulay G., 2014. Using iNaturalist to engage the public and
-> learn more about echinoderms.
+> Michonneau F. & Paulay G., 2014. Using iNaturalist to learn more about
+> echinoderms. Available from
+> [http://github.com/fmichonneau/inat-paper](http://github.com/fmichonneau/inat-paper).
+
+The initial version of this manuscript has been submitted to Reef Encounter on
+June 6<sup>th</sup>, 2014. It has been tagged `v20140606.0+reefencounter`. The
+full repository for this version can be downloaded
+[here](https://github.com/fmichonneau/inat-paper/tree/v20140606.0%2Breefencounter),
+and the submitted version of the PDF can be downloaded [here](https://github.com/fmichonneau/inat-paper/blob/7feac355c923ace136220123d926e18556414876/iNaturalist-paper.pdf?raw=true)
