@@ -9,7 +9,7 @@ zissouPal <- wes_palette(name = "Zissou", type="continuous")
 zissouPalDisc <- wes_palette(5, name="Zissou")
 zissouPerClass <- zissouPalDisc[c(5, 1, 4, 3, 2)]
 
-seaCol <- "#dfeff2" 
+seaCol <- "#dfeff2"
 landCol <- "#b0ccad"
 
 ### ---- data-prep ----
@@ -84,7 +84,7 @@ addClass <- merge(inatThin, taxonomyAphiaID,  all.x=TRUE)
 ### ---- all-observations ----
 uniqGPS <- paste(addClass$Class, addClass$Lat2, addClass$Long2, sep="/")
 tableGPS <- table(uniqGPS)
-coordsGPS <- strsplit(names(tableGPS), "/") 
+coordsGPS <- strsplit(names(tableGPS), "/")
 nbObsTable <- data.frame(class = sapply(coordsGPS, function(x) x[1]),
                          latitude=as.numeric(sapply(coordsGPS, function(x) x[2])),
                          longitude=as.numeric(sapply(coordsGPS, function(x) x[3])),
@@ -96,8 +96,8 @@ ggplot(nbObsTable) + annotation_map(wrld, color="NA", fill=landCol) +
     geom_point(aes(x=longitude, y=latitude, size=nbObs, colour=class),
                position=position_jitter(width=1)) +
     scale_size(range=c(4, 15)) + ylab("Latitude") + xlab("Longitude") +
-    coord_map(projection="mercator") + ylim(c(-35, 58)) +
-    scale_colour_manual(values = zissouPerClass) +    
+    coord_map(projection="mercator") + ylim(c(-55, 55)) +
+    scale_colour_manual(values = zissouPerClass) +
     theme(legend.position = c(.97,.9), legend.title = element_blank(),
           legend.direction = "horizontal", legend.justification = "right",
           panel.background = element_rect(fill = seaCol),
