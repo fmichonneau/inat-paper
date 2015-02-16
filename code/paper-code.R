@@ -94,11 +94,12 @@ nbObsTable <- subset(nbObsTable, class != "NA")
 
 ggplot(nbObsTable) + annotation_map(wrld, color="NA", fill=landCol) +
     geom_point(aes(x=longitude, y=latitude, size=nbObs, colour=class),
-               position=position_jitter(width=1)) +
-    scale_size(range=c(4, 15)) + ylab("Latitude") + xlab("Longitude") +
+               position=position_jitter(width=2)) +
+    scale_size(range=c(3,10), breaks=c(1,100,300)) +
+    ylab("Latitude") + xlab("Longitude") +
     coord_map(projection="mercator") + ylim(c(-55, 55)) +
     scale_colour_manual(values = zissouPerClass) +
-    theme(legend.position = c(.97,.9), legend.title = element_blank(),
+    theme(legend.position = "top", legend.title = element_blank(),
           legend.direction = "horizontal", legend.justification = "right",
-          panel.background = element_rect(fill = seaCol),
-          panel.grid.major = element_line(colour = "white", size=0.1))
+          panel.background = element_rect(fill = seaCol)) #,
+          #panel.grid.major = element_line(colour = "white", size=0.1))
