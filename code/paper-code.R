@@ -12,38 +12,73 @@ zissouPerClass <- zissouPalDisc[c(5, 1, 4, 3, 2)]
 seaCol <- "#dfeff2" 
 landCol <- "#b0ccad"
 
-### ---- data-prep ---- 
-inat <- read.csv(file="data/echinoderms.all.csv", stringsAsFactors=FALSE)
+### ---- data-prep ----
+## library(rinat)
+## inat <- get_inat_obs_project("echinoderms", type="observations")
+## the headers are a little different, so using manual download to not have
+##  to change the entire code.
+inat <- read.csv(file="data/20150204.echinoderms.all.csv", stringsAsFactors=FALSE)
 inatThin <- thinCoords(inat)
 wrld <- map_data("world")
 
 ## Higher classification
+library(taxizesoap)
 uniqSpp <- unique(inat$scientific_name)
-## library(taxize)
-## ## higherClass <- classification(uniqSpp, db="itis") ## very incomplete
-## higherClassNCBI <- classification(uniqSpp, db="ncbi") # much better
-## save(higherClassNCBI, file="data/higherClassNBCI.RData")
 
-load("data/higherClassNBCI.RData")
-higherClass <- rbind(higherClassNCBI)
-classTaxa <- subset(higherClass, rank == "class")
+## remove the empty one
+uniqSpp <- uniqSpp[nzchar(uniqSpp)]
 
-## dealing manually with species not in NCBI
-## write.csv(uniqSpp[! uniqSpp %in% classTaxa$taxonid], file="/tmp/missingTaxa.csv",
-##          row.names=FALSE)
-## after manual editing
-missingTaxa <- read.csv(file="data/missingTaxa-classes.csv", stringsAsFactors=FALSE)
+## /Gomophia gomophia/ isn't in WoRMS, replacing with Gomophia here
+uniqSpp[match("Gomophia gomophia", uniqSpp)] <- "Gomophia"
 
-## after updating data, will need to check that all data is included
+## ## Get WoRMS AphiaID for all species
+## wormsClass1_ids <- lapply(uniqSpp, function(x) {
+##     tmpRes <- get_wormsid(x)
+##     if (is.na(tmpRes)) {
+##         tmpRes <- worms_records(x, fuzzy=TRUE)
+##         tmpRes <- unique(tmpRes[tmpRes$phylum == "Echinodermata"]$valid_AphiaID)
+##         tmpRes
+##     }
+##     tmpRes
+## })
 
-classTaxa <- rbind(classTaxa, missingTaxa)
-addClass <- merge(inatThin, classTaxa, by.x="scientific_name", by.y="taxonid", all.x=TRUE)
-names(addClass)[match("name", names(addClass))] <- "class"
+## ## OK that Echinaster sepositus has more than 1
+## ## Checked and 1 item is OK to use.
+## testLength <- sapply(wormsClass1_ids, length)
+## if (any(testLength > 1)) {
+##     warning("Some taxa returned more than one AphiaID: ",
+##             paste(uniqSpp[[which(testLength > 1)]], collapse=", "))
+## }
 
-## Fix error in NCBI database
-addClass[addClass$class == "Gymnolaemata" & !is.na(addClass$class), "class"] <- "Echinoidea"
+## ## Using only first elements
+## wormsClass1_idsx <- sapply(wormsClass1_ids, function(x) x[1])
+## wormsHigherClass <- lapply(wormsClass1_idsx, taxizesoap:::classification_s.wormsid)
 
-## sum(is.na(addClass$class)) ## currenly only 2 missing
+## wormsHigherClassDf <- do.call("rbind", lapply(wormsHigherClass, function(x) {
+##     cbind(aphiaID=names(x)[1], x[[1]])
+## }))
+
+## wormsClassFamily <- split(wormsHigherClassDf, wormsHigherClassDf$aphiaID) %>%
+##     lapply(., function(x) {
+##         resCl <- subset(x, rank == "Class")
+##         resFm <- subset(x, rank == "Family")
+##         cl <- as.character(resCl[["name"]])
+##         fm <- as.character(resFm[["name"]])
+##         if (length(cl) != 1) cl <- NA
+##         if (length(fm) != 1) fm <- NA
+##         c(as.character(x[[1]][1]), cl, fm)
+##     }) %>%
+##         do.call("rbind", .) %>% as.data.frame(.)
+
+## names(wormsClassFamily) <- c("aphiaID", "Class", "Family")
+
+## taxonomyAphiaID <- cbind(scientific_name=uniqSpp, aphiaID=wormsClass1_idsx) %>%
+##     merge(., wormsClassFamily, all.x=TRUE)
+
+## saveRDS(taxonomyAphiaID, file="data/taxonomyAphiaID.rds")
+
+taxonomyAphiaID <- readRDS(file="data/taxonomyAphiaID.rds")
+addClass <- merge(inatThin, taxonomyAphiaID,  all.x=TRUE)
 
 ### Map of all observations thinned (at 200km scale), grouped by classes.
 ### ---- all-observations ----
