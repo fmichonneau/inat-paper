@@ -82,7 +82,7 @@ addClass <- merge(inatThin, taxonomyAphiaID,  all.x=TRUE)
 
 ### Map of all observations thinned (at 200km scale), grouped by classes.
 ### ---- all-observations ----
-uniqGPS <- paste(addClass$class, addClass$Lat2, addClass$Long2, sep="/")
+uniqGPS <- paste(addClass$Class, addClass$Lat2, addClass$Long2, sep="/")
 tableGPS <- table(uniqGPS)
 coordsGPS <- strsplit(names(tableGPS), "/") 
 nbObsTable <- data.frame(class = sapply(coordsGPS, function(x) x[1]),
