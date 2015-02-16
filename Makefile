@@ -1,4 +1,9 @@
-all: iNaturalist-paper.aux iNaturalist-paper.tex
+all: word pdf
+
+word: iNaturalist-paper.aux iNaturalist-paper.tex
+	pandoc -t docx -o iNaturalist-paper.docx --csl coral-reefs.csl --bibliography iNaturalist-nourl.bib iNaturalist-paper.tex
+
+pdf: iNaturalist-paper.aux iNaturalist-paper.tex
 	xelatex  -interaction=nonstopmode "\input" iNaturalist-paper.tex
 	xelatex  -interaction=nonstopmode "\input" iNaturalist-paper.tex
 	make clean-partial
