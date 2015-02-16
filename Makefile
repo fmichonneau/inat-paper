@@ -1,4 +1,4 @@
-all: word pdf
+all: pdf
 
 word: 2015-Michonneau+Paulay-ReefEncounters.docx
 
