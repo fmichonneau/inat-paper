@@ -5,8 +5,8 @@ source("code/paper-functions.R")
 
 ## Color definition
 library(wesanderson)
-zissouPal <- wes.palette(name = "Zissou", type="continuous")
-zissouPalDisc <- wes.palette(5, name="Zissou")
+zissouPal <- wes_palette(name = "Zissou", type="continuous")
+zissouPalDisc <- wes_palette(5, name="Zissou")
 zissouPerClass <- zissouPalDisc[c(5, 1, 4, 3, 2)]
 
 seaCol <- "#dfeff2" 
