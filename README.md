@@ -16,34 +16,38 @@ public about the diversity of Echinoderms.
 
 You need:
 
-- a functional LaTeX installation;
+- a functional LaTeX installation (here I use XeTeX)
 - [R](http://www.r-project.org) with the following packages:
   * [knitr](http://cran.r-project.org/package=knitr)
   * [ggplot2](http://cran.r-project.org/package=ggplot2)
   * [wesanderson](https://github.com/karthik/wesanderson)
-  * [taxize](http://f1000research.com/articles/2-191/v2)
+  * [taxizesoap](http://github.coom/ropensci/taxizesoap)
 
-In R, after pulling the content of the repository, you should be able to just
-do:
+The project includes a `Makefile`, so if you have `make` installed, typing `make
+all` inside the folder will generate the manuscript in PDF format.
+
+If you don't have `make`, you can first generate the `tex` file in R:
 
     library(knitr)
-    knit("iNaturalist-paper.Rnw")
+    knit("2015-Michonneau+Paulay-ReefEncounters.Rnw")
 
-and then compile the file generated (`iNaturalist-paper.tex`) using `XeLaTeX`.
+and then compile the file generated (`iNaturalist-paper.tex`) using
+`XeTeX`.
 
-I used Ubuntu 14.04 to generate the files included in this repository.
+(I used Ubuntu 14.10 to generate the files included in this repository.)
 
 # Citation & License
 
 The content of this repository is under a Creative Commons Attribution License
 [CC-BY 4.0](http://creativecommons.org/licenses/by/4.0).
 
-> Michonneau F. & Paulay G., 2014. Using iNaturalist to learn more about
-> echinoderms. Available from
-> [http://github.com/fmichonneau/inat-paper](http://github.com/fmichonneau/inat-paper).
+> Michonneau F. & Paulay G., 2015. Using iNaturalist to learn more about
+> echinoderms. Available from figshare
+> (doi:[10.6084/m9.figshare.1309937](http://dx.doi.org/10.6084/m9.figshare.1309937))
 
 The initial version of this manuscript has been submitted to Reef Encounter on
 June 6<sup>th</sup>, 2014. It has been tagged `v20140606.0+reefencounter`. The
 full repository for this version can be downloaded
 [here](https://github.com/fmichonneau/inat-paper/tree/v20140606.0%2Breefencounter),
-and the submitted version of the PDF can be downloaded [here](https://github.com/fmichonneau/inat-paper/blob/7feac355c923ace136220123d926e18556414876/iNaturalist-paper.pdf?raw=true)
+and the submitted version of the PDF can be downloaded
+[here](https://github.com/fmichonneau/inat-paper/blob/7feac355c923ace136220123d926e18556414876/iNaturalist-paper.pdf?raw=true)
