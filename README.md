@@ -50,7 +50,7 @@ June 6<sup>th</sup>, 2014. It has been tagged `v20140606.0+reefencounter`. The
 full repository for this version can be downloaded
 [here](https://github.com/fmichonneau/inat-paper/tree/v20140606.0%2Breefencounter),
 and the submitted version of the PDF can be downloaded
-[here](https://github.com/fmichonneau/inat-paper/blob/7feac355c923ace136220123d926e18556414876/iNaturalist-paper.pdf?raw=true)
+[here](https://github.com/fmichonneau/inat-paper/blob/7feac355c923ace136220123d926e18556414876/iNaturalist-paper.pdf?raw=true).
 
 
 The revised version of the manuscripted has been submitted on February
@@ -58,4 +58,7 @@ The revised version of the manuscripted has been submitted on February
 repository for this version can be downloaded
 [here](https://github.com/fmichonneau/inat-paper/tree/v20150216.1%2Breefencounter),
 and the submitted version of the PDF can be downloaded
-[here](https://github.com/fmichonneau/inat-paper/blob/ecc44d93b638cfeb144c26288c81d5015f729d3e/2015-Michonneau%2BPaulay-ReefEncounters.pdf)
+[here](https://github.com/fmichonneau/inat-paper/blob/ecc44d93b638cfeb144c26288c81d5015f729d3e/2015-Michonneau%2BPaulay-ReefEncounters.pdf).
+After the editor found a few typos, another version has been released and tagged
+`v20150216.2+reefencounter`. The full repository for this version can be
+downloaded [here](https://github.com/fmichonneau/inat-paper/tree/v20150216.2%2Breefencounter),
